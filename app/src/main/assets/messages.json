@@ -1,0 +1,46 @@
+{
+  "profileImageUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+  "name": "Elon Musk",
+  "messages": [
+    {
+      "message": "Hey honey \uD83D\uDE00",
+      "dateTime": "10:00 am",
+      "sent": true
+    },
+    {
+      "message": "Hey, what's up?",
+      "dateTime": "10:01 am",
+      "sent": false
+    },
+    {
+      "message": "Check out this online",
+      "dateTime": "10:20 am",
+      "sent": true
+    },
+    {
+      "message": "Wow pretty cool!",
+      "dateTime": "10:21 am",
+      "sent": true
+    },
+    {
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "dateTime": "10:23 am",
+      "sent": false
+    },
+    {
+      "message": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "dateTime": "10:25 am",
+      "sent": true
+    },
+    {
+      "message": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+      "dateTime": "11:01 am",
+      "sent": false
+    },
+    {
+      "message": " It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "dateTime": "11:02 am",
+      "sent": false
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "profileImageUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+  "list": [
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1604901202696802330/3AFCTFCK_400x400.jpg",
+      "name": "NF Formula #F1 \uD83C\uDFC1",
+      "userName": "NFFormula",
+      "ago": "10m",
+      "verified": true,
+      "protected": false,
+      "lastMessage": "❓"
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1603448806879772672/Pa4h6HHS_400x400.jpg",
+      "name": "OKX",
+      "userName": "okx",
+      "ago": "1d",
+      "verified": true,
+      "protected": false,
+      "lastMessage": "Discover crypto, on top of one of the world's most reliabl"
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/378800000857919980/lHqPIZza_400x400.png",
+      "name": "Dogecoin",
+      "userName": "dogecoin",
+      "ago": "2d",
+      "verified": true,
+      "protected": false,
+      "lastMessage": "All in Dogecoin"
+    }
+  ]
+}

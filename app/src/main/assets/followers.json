@@ -1,0 +1,92 @@
+{
+  "list": [
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/830487191650340864/vDDgg9Ra_400x400.jpg",
+      "name": "Robert Iger",
+      "userName": "RobertIger",
+      "verified": true,
+      "description": "CEO The Walt Disney Company",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1583254772307689477/6SsEwSSV_400x400.jpg",
+      "name": "Maye Musk",
+      "userName": "mayemusk",
+      "verified": true,
+      "description": "Bestselling International Author #AWomanMakesAPlan Dietitian with 2 MSc degrees ",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1008064545741590528/jC1TZ9vF_400x400.jpg",
+      "name": "Fiona Carter",
+      "userName": "FionaCarter",
+      "verified": true,
+      "description": "An Englishwoman in Brooklyn and Montauk. Wife, Mum, Friend.",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1515701615512203265/VBhTSjlO_400x400.jpg",
+      "name": "Rachel Scott",
+      "userName": "rachelvscott",
+      "verified": true,
+      "description": "Congressional Correspondent for @ABC ✉️ DM’s open. Academics courtesy of @USCAnnenberg.",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1598348170400239621/Q0zxpMPC_400x400.jpg",
+      "name": "Funko",
+      "userName": "OriginalFunko",
+      "verified": true,
+      "description": "Funko is a pop culture collectibles company. ",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1583254772307689477/6SsEwSSV_400x400.jpg",
+      "name": "Maye Musk",
+      "userName": "mayemusk",
+      "verified": true,
+      "description": "Bestselling International Author #AWomanMakesAPlan Dietitian with 2 MSc degrees ",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1591558315254890500/ETIHb4Nl_400x400.jpg",
+      "name": "Jeff Bezos",
+      "userName": "JeffBezos",
+      "verified": true,
+      "description": "Amazon. Blue Origin. Washington Post. Bezos Earth Fund. Bezos Academy.",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1577823293238874113/kanrEsZa_400x400.jpg",
+      "name": "Lewis Hamilton",
+      "userName": "LewisHamilton",
+      "verified": true,
+      "description": "Based Diet. Love Animals. Living in my purpose, for adventure, open-mindedness and positivity ",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1542539418526810113/oXELZZrb_400x400.jpg",
+      "name": "BEYONCÉ",
+      "userName": "Beyonce",
+      "verified": true,
+      "description": "act i RENAISSANCE out now",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1299844050208555008/7wMQaJRA_400x400.jpg",
+      "name": "Ryan Reynolds",
+      "userName": "VancityReynolds",
+      "verified": true,
+      "description": "owner: @aviationgin - @MintMobile - @maximumeffort - @Wrexham_AFC",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1409080347116011522/AEIDQX7h_400x400.jpg",
+      "name": "Satoshi Nakamoto",
+      "userName": "0xNakamoto",
+      "verified": true,
+      "description": "Crypto Memes and Analysis Mostly",
+      "isFollowing": true
+    }
+  ]
+}

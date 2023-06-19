@@ -1,0 +1,55 @@
+{
+  "list": [
+    {
+      "type": "liked",
+      "profiles": [
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1464706341927325699/8YX-8F___400x400.jpg",
+          "name": "elon musk"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+          "name": "NASA"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1583254772307689477/6SsEwSSV_400x400.jpg",
+          "name": "Maye Musk"
+        }
+      ]
+    },
+    {
+      "type": "retweeted",
+      "profiles": [
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/895407294636187648/xoppJ-eR_400x400.jpg",
+          "name": "Neuralink"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1591558315254890500/ETIHb4Nl_400x400.jpg",
+          "name": "Jeff Bezos"
+        }
+      ]
+    },
+    {
+      "type": "followed",
+      "profiles": [
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1308769664240160770/AfgzWVE7_400x400.jpg",
+          "name": "Joe Biden"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+          "name": "NASA"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/895407294636187648/xoppJ-eR_400x400.jpg",
+          "name": "Neuralink"
+        },
+        {
+          "profileImageUrl": "https://pbs.twimg.com/profile_images/1591558315254890500/ETIHb4Nl_400x400.jpg",
+          "name": "Jeff Bezos"
+        }
+      ]
+    }
+  ]
+}

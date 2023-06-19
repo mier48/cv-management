@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">CV-Management</string>
+
+    <string name="unknow.host.exception.error">No hay conexión a internet</string>
+    <string name="unknow.error">Error desconocido</string>
+
+    <string name="email.hint">Email</string>
+    <string name="invalid.email">No es un email válido</string>
+    <string name="password.hint">Contraseña</string>
+    <string name="invalid.password">No es una contraseña válida</string>
+    <string name="name.hint">Nombre</string>
+    <string name="invalid.name">No es una nombre válido</string>
+    <string name="confirm.password.hint">Confirmar contraseña</string>
+    <string name="invalid.confirm.password">Las contraseñas no coinciden</string>
+    <string name="forgot.password">¿Has olvidado la contraseña?</string>
+    <string name="btn.login">Entrar</string>
+    <string name="btn.register">Crear cuenta</string>
+    <string name="info.not.account">¿No tienes una cuenta?</string>
+    <string name="info.not.account.register">Registrarse</string>
+    <string name="info.have.account">¿Ya tienes una cuenta?</string>
+    <string name="info.have.account.login">Entrar</string>
+    <string name="separator.or">O</string>
+
+    <string name="lang.es">Español</string>
+    <string name="lang.en">Inglés</string>
+    <string name="language.array.title">Idioma</string>
 </resources>

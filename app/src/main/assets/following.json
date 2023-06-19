@@ -1,0 +1,76 @@
+{
+  "list": [
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/956331551435960322/OaqR8pAB_400x400.jpg",
+      "name": "Lex Fridman",
+      "userName": "lexfridman",
+      "verified": true,
+      "description": "Host of Lex Fridman Podcast. Research Scientist at MIT. Interested in robots and humans.",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1594695037820059649/yo1CYXwx_400x400.jpg",
+      "name": "Matt Taibbi",
+      "userName": "mtaibbi",
+      "verified": true,
+      "description": "Author of GRIFTOPIA, THE DIVIDE, THE BUSINESS SECRETS OF DRUG DEALING, and HATE INC.",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1583254772307689477/6SsEwSSV_400x400.jpg",
+      "name": "Maye Musk",
+      "userName": "mayemusk",
+      "verified": true,
+      "description": "Bestselling International Author #AWomanMakesAPlan Dietitian with 2 MSc degrees ",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1253477073265532928/MmGBMWsQ_400x400.jpg",
+      "name": "Everyday Astronaut",
+      "userName": "Erdayastronaut",
+      "verified": true,
+      "description": "Professional rocket orientation specialist, explainer of flamey stuff and rocket chaser. Bringing space down to Earth for everyday people",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/552307347851210752/vrXDcTFC_400x400.jpeg",
+      "name": "Joe Rogan",
+      "userName": "joerogan",
+      "verified": true,
+      "description": "Stand up comic/mixed martial arts fanatic/psychedelic adventurer Host of The Joe Rogan Experience",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/378800000857919980/lHqPIZza_400x400.png",
+      "name": "Dogecoin",
+      "userName": "dogecoin",
+      "verified": true,
+      "description": "Dogecoin is an open source peer-to-peer cryptocurrency, favored by shibas worldwide. Elon Musk thinks we're pretty cool",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/895407294636187648/xoppJ-eR_400x400.jpg",
+      "name": "Neuralink",
+      "userName": "neuralink",
+      "verified": true,
+      "description": "Developing high bandwidth brain-machine interfaces to connect humans and machines.",
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1039775185862242304/-NLaPOqV_400x400.jpg",
+      "name": "The Boring Company",
+      "userName": "boringcompany",
+      "verified": true,
+      "description": "Beat the snail",
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1594559420767297536/0qVCNYpI_400x400.jpg",
+      "name": "Luke Rudkowski",
+      "userName": "Lukewearechange",
+      "verified": true,
+      "description": "Mr. Rudkowski is no shrinking violet. Armed with a video camera and a YouTube account- NYTIMES",
+      "isFollowing": false
+    }
+  ]
+}

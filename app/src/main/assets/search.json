@@ -1,0 +1,67 @@
+{
+  "profileImageUrl": "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_400x400.jpg",
+  "trends": [
+    {
+      "header": "Trending in Turkey",
+      "title": "NASA",
+      "tweetCount": "37K"
+    },
+    {
+      "header": "Trending in Turkey",
+      "title": "#thyao",
+      "tweetCount": "17K"
+    },
+    {
+      "header": "Trending in Turkey",
+      "title": "#Ekrem baskan",
+      "tweetCount": "1,452"
+    },
+    {
+      "header": "Actors Trending",
+      "title": "Elon Musk",
+      "tweetCount": "170K"
+    },
+    {
+      "header": "Trending in Turkey",
+      "title": "No Context",
+      "tweetCount": "17K"
+    }
+  ],
+  "suggestions": [
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/956331551435960322/OaqR8pAB_400x400.jpg",
+      "name": "Lex Fridman",
+      "userName": "lexfridman",
+      "verified": true,
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1594695037820059649/yo1CYXwx_400x400.jpg",
+      "name": "Matt Taibbi",
+      "userName": "mtaibbi",
+      "verified": true,
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/895407294636187648/xoppJ-eR_400x400.jpg",
+      "name": "Neuralink",
+      "userName": "neuralink",
+      "verified": true,
+      "isFollowing": false
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/1039775185862242304/-NLaPOqV_400x400.jpg",
+      "name": "Boring",
+      "userName": "boringcompany",
+      "verified": true,
+      "isFollowing": true
+    },
+    {
+      "profileImage": "https://pbs.twimg.com/profile_images/378800000857919980/lHqPIZza_400x400.png",
+      "name": "Dogecoin",
+      "userName": "dogecoin",
+      "verified": true,
+      "isFollowing": true
+    }
+  ]
+}

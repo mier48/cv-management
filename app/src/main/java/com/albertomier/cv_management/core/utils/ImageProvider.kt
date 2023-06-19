@@ -1,0 +1,15 @@
+package com.albertomier.cv_management.core.utils
+
+const val ic_facebook = "t2_ic_facebook.png"
+const val ic_google = "t2_ic_google.png"
+const val ic_wallet = "t2_ic_wallet.jpg"
+const val ic_edit = "t2_ic_edit.png"
+const val ic_visa = "t2_ic_visa.png"
+const val ic_user = "t2_ic_user.png"
+const val ic_logo = "t2_ic_logo.png"
+const val ic_background = "t2_ic_background.png"
+const val ic_home = "t2_ic_home.png"
+const val ic_graph = "t2_ic_graph.png"
+const val ic_scan = "t2_ic_scan.png"
+const val ic_wallate = "t2_ic_wallate.png"
+const val ic_profile = "t2_ic_profile.png"
