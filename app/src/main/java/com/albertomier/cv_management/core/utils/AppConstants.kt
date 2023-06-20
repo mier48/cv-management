@@ -5,7 +5,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 object AppConstants {
-    const val BASE_URL: String = "https://api.albertomier.com/public/api/"
+    const val BASE_URL: String = "https://api.ltrwebsolutions.es/public/api/"
     const val PERMISSION_REQUEST_CODE = 101
     const val DATABASE_NAME = "data_base"
     const val TAG = "LOG_TAG"
@@ -47,5 +47,5 @@ object Preferences {
     const val USER = "user"
     const val ID = "id"
     const val AUTHOR_ID = "author_id"
-    const val POST_ID = "post_id"
+    const val COMPANY_ID = "company_id"
 }

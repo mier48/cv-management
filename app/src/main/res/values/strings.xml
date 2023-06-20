@@ -24,4 +24,8 @@
     <string name="lang.es">Español</string>
     <string name="lang.en">Inglés</string>
     <string name="language.array.title">Idioma</string>
+
+    <string name="personal_info">Personal info</string>
+    <string name="education">Education</string>
+    <string name="experience">Experience</string>
 </resources>

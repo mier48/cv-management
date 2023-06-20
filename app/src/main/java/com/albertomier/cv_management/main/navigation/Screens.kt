@@ -5,7 +5,7 @@ sealed class Screens(val route: String) {
     object Home : Screens("home")
     object Main : Screens("main")
     object Profile : Screens("profile")
-    object AddTweet : Screens("add_tweet")
+    object AddCompany : Screens("add_company")
     object Followers : Screens("followers")
     object Following : Screens("following")
     object MessageList : Screens("message_list")

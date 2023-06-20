@@ -1,5 +1,6 @@
 package com.albertomier.cv_management.core.di
 
+import com.albertomier.cv_management.company.data.network.CompanyClient
 import com.albertomier.cv_management.core.utils.AppConstants.BASE_URL
 import com.albertomier.cv_management.core.utils.AppConstants.DEFAULT_TIMEOUT
 import com.albertomier.cv_management.login.data.network.LoginClient
@@ -41,5 +42,10 @@ object NetworkModule {
     @Provides
     fun provideLoginClient(retrofit: Retrofit): LoginClient =
         retrofit.create(LoginClient::class.java)
+
+    @Singleton
+    @Provides
+    fun provideCompanyClient(retrofit: Retrofit): CompanyClient =
+        retrofit.create(CompanyClient::class.java)
 
 }

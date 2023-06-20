@@ -1,9 +1,13 @@
 package com.albertomier.cv_management.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.albertomier.cv_management.company.ui.view.AddCompanyActivity
+import com.albertomier.cv_management.company.ui.view.CompanyDetailActivity
+import com.albertomier.cv_management.core.utils.Preferences
 import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
 import com.albertomier.cv_management.main.navigation.MyAppNavHost
 import com.albertomier.cv_management.ui.theme.BaseTheme
@@ -18,7 +22,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BaseTheme {
-                MyAppNavHost(viewModel = homeViewModel)
+                MyAppNavHost(
+                    viewModel = homeViewModel,
+                    onItemSelected = { goToDetailView(it) },
+                    onFabButtonClick = {
+                        startActivity(Intent(this, AddCompanyActivity::class.java))
+                    })
             }
         }
     }
@@ -40,16 +49,16 @@ class MainActivity : ComponentActivity() {
 //        }
 //    }
 
-//    override fun onResume() {
-//        super.onResume()
-//        homeViewModel.loadUserData()
-//    }
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getCompanyList()
+    }
 
-//    private fun goToDetailView(itemId: Int?) {
-//        val intent = Intent(this, FeedDetailActivity::class.java)
-//        intent.putExtra(Preferences.POST_ID, itemId)
-//        startActivity(intent)
-//    }
+    private fun goToDetailView(itemId: Int?) {
+        val intent = Intent(this, CompanyDetailActivity::class.java)
+        intent.putExtra(Preferences.COMPANY_ID, itemId)
+        startActivity(intent)
+    }
 //
 //    private fun goToAuthorView(authorId: Int?) {
 //        val intent = Intent(this, AuthorActivity::class.java)

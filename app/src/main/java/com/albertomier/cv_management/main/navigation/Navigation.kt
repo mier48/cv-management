@@ -14,7 +14,9 @@ fun MyAppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = Screens.Main.route,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    onItemSelected: (id: Int?) -> Unit,
+    onFabButtonClick: () -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -22,19 +24,12 @@ fun MyAppNavHost(
         startDestination = startDestination,
         route = "mainRoute"
     ) {
-        //composable(Splash.route) { SplashScreen(navController) }
         composable(Screens.Main.route) {
             MainScreen(
-                navHostController = navController,
-                viewModel = viewModel
+                viewModel = viewModel,
+                onItemSelected = onItemSelected,
+                onFabButtonClick = onFabButtonClick
             )
         }
-//        composable(AuthorDetail.route) { AuthorScreen(navController) }
-//        composable(Profile.route) { ProfileScreen(navController) }
-//        composable(AddTweet.route) { AddTweetScreen(navController) }
-//        composable(Followers.route) { FollowersScreen(navController, "followers") }
-//        composable(Following.route) { FollowersScreen(navController, "following") }
-//        composable(MessageDetail.route) { MessageDetailScreen(navController) }
-//        composable(Settings.route) { SettingsScreen(navController) }
     }
 }

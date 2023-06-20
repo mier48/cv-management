@@ -17,7 +17,7 @@ val appRedColor2 = Color(0xFF940707)
 val appYellowColor = Color(0xFFFA9905)
 val appPinkColor = Color(0xFFE93B81)
 
-val appBackgroundColor = Color(0xFFF3F3F3)
+val appBackgroundColor = Color(0xFF8E8F91)
 val GrayColor = Color(0xFFF4F4F7)
 val appScaffoldColor = Color(0xFFFFFFFF)
 val appIconColor = Color(0xFF8E8F91)

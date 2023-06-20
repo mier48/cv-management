@@ -1,8 +1,11 @@
 package com.albertomier.cv_management.core.extensions
 
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun String.toBase64() = stringToBase64(this)
 
@@ -26,6 +29,10 @@ fun String?.validate(value: String = ""): String {
 
 fun String.log(debugKey: String = "Value"): Int {
     return Log.d(debugKey, this)
+}
+
+fun String.isValidEmail(): Boolean {
+    return !TextUtils.isEmpty(this) && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 private fun stringToBase64(str: String): String {
