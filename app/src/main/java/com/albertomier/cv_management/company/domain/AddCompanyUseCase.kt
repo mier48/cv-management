@@ -13,6 +13,7 @@ class AddCompanyUseCase @Inject constructor(private val repository: CompanyRepos
         contactName: String,
         contactPhone: String,
         contactEmail: String,
+        description: String
     ): ApiResponseStatus<String> =
         repository.addCompany(
             name = name,
@@ -20,6 +21,7 @@ class AddCompanyUseCase @Inject constructor(private val repository: CompanyRepos
             email = email,
             contactName = contactName,
             contactPhone = contactPhone,
-            contactEmail = contactEmail
+            contactEmail = contactEmail,
+            description = description
         )
 }

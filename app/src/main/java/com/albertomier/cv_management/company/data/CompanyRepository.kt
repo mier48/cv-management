@@ -2,6 +2,7 @@ package com.albertomier.cv_management.company.data
 
 import com.albertomier.cv_management.company.data.network.CompanyService
 import com.albertomier.cv_management.company.domain.model.CompanyItem
+import com.albertomier.cv_management.company.domain.model.InterviewItem
 import com.albertomier.cv_management.company.domain.model.toDomain
 import com.albertomier.cv_management.core.network.ApiResponseStatus
 import com.albertomier.cv_management.core.network.makeNetworkCall
@@ -21,6 +22,12 @@ class CompanyRepository @Inject constructor(private val companyService: CompanyS
             result.toDomain()
         }
 
+    suspend fun getInterviewListByCompanyId(companyId: Int): ApiResponseStatus<List<InterviewItem>> =
+        makeNetworkCall {
+            val result = companyService.getInterviewListByCompanyId(companyId)
+            result.map { it.toDomain() }
+        }
+
     suspend fun addCompany(
         name: String,
         phone: String,
@@ -28,16 +35,34 @@ class CompanyRepository @Inject constructor(private val companyService: CompanyS
         contactName: String,
         contactPhone: String,
         contactEmail: String,
+        description: String
     ): ApiResponseStatus<String> =
         makeNetworkCall {
-            val result = companyService.addCompany(
+            companyService.addCompany(
                 name = name,
                 phone = phone,
                 email = email,
                 contactName = contactName,
                 contactPhone = contactPhone,
-                contactEmail = contactEmail
-            )
-            ""
+                contactEmail = contactEmail,
+                description = description
+            ).response
+        }
+
+    suspend fun addInterview(
+        companyId: Int,
+        date: String,
+        hour: String,
+        comment: String,
+        done: Int
+    ): ApiResponseStatus<String> =
+        makeNetworkCall {
+            companyService.addInterview(
+                companyId = companyId,
+                date = date,
+                hour = hour,
+                comment = comment,
+                done = done
+            ).response
         }
 }

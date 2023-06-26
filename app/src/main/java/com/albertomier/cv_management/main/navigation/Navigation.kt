@@ -17,6 +17,7 @@ fun MyAppNavHost(
     viewModel: HomeViewModel,
     onItemSelected: (id: Int?) -> Unit,
     onFabButtonClick: () -> Unit,
+    onTopBarButtonClick: () -> Unit
 ) {
     NavHost(
         modifier = modifier,
@@ -28,7 +29,8 @@ fun MyAppNavHost(
             MainScreen(
                 viewModel = viewModel,
                 onItemSelected = onItemSelected,
-                onFabButtonClick = onFabButtonClick
+                onFabButtonClick = onFabButtonClick,
+                onTopBarButtonClick = onTopBarButtonClick
             )
         }
     }

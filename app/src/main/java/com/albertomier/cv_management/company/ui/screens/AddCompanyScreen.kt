@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -34,6 +36,7 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
     val companyContactName: String by viewModel.companyContactName.observeAsState(initial = "")
     val companyContactPhone: String by viewModel.companyContactPhone.observeAsState(initial = "")
     val companyContactEmail: String by viewModel.companyContactEmail.observeAsState(initial = "")
+    val companyDescription: String by viewModel.companyDescription.observeAsState(initial = "")
     val isAddCompanyEnabled: Boolean by viewModel.isAddCompanyEnabled.observeAsState(initial = false)
 
     Scaffold(
@@ -55,7 +58,9 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
             color = MaterialTheme.colorScheme.background
         ) {
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TextFieldRounded(
@@ -69,7 +74,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = companyEmail,
                         companyContactName = companyContactName,
                         companyContactPhone = companyContactPhone,
-                        companyContactEmail = companyContactEmail
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = companyDescription
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -85,7 +91,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = companyEmail,
                         companyContactName = companyContactName,
                         companyContactPhone = companyContactPhone,
-                        companyContactEmail = companyContactEmail
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = companyDescription
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -101,7 +108,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = value,
                         companyContactName = companyContactName,
                         companyContactPhone = companyContactPhone,
-                        companyContactEmail = companyContactEmail
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = companyDescription
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -116,7 +124,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = companyEmail,
                         companyContactName = value,
                         companyContactPhone = companyContactPhone,
-                        companyContactEmail = companyContactEmail
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = companyDescription
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -132,7 +141,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = companyEmail,
                         companyContactName = companyContactName,
                         companyContactPhone = value,
-                        companyContactEmail = companyContactEmail
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = companyDescription
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -148,7 +158,27 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                         companyEmail = companyEmail,
                         companyContactName = companyContactName,
                         companyContactPhone = companyContactPhone,
-                        companyContactEmail = value
+                        companyContactEmail = value,
+                        companyDescription = companyDescription
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                TextFieldRounded(
+                    value = companyDescription,
+                    label = "Descripción",
+                    placeholder = "Añade una descripción de la empresa",
+                    singleLine = false,
+                    minLines = 3,
+                    maxLines = 6
+                ) { value ->
+                    viewModel.onDataChanged(
+                        companyName = companyName,
+                        companyPhone = companyPhone,
+                        companyEmail = companyEmail,
+                        companyContactName = companyContactName,
+                        companyContactPhone = companyContactPhone,
+                        companyContactEmail = companyContactEmail,
+                        companyDescription = value
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -163,7 +193,8 @@ fun AddCompanyScreen(viewModel: CompanyViewModel, activity: AddCompanyActivity) 
                             companyEmail = companyEmail,
                             companyContactName = companyContactName,
                             companyContactPhone = companyContactPhone,
-                            companyContactEmail = companyContactEmail
+                            companyContactEmail = companyContactEmail,
+                            companyDescription = companyDescription
                         )
                         activity.finish()
                     })

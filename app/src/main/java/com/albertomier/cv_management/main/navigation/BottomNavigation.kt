@@ -26,6 +26,6 @@ fun BottomNavigation(
         route = "bottomRoute"
     ) {
         composable(Screens.Home.route) { HomeScreen(viewModel, listState, onItemSelected) }
-        composable(Screens.Profile.route) { ProfileScreen(viewModel) }
+        //composable(Screens.Profile.route) { ProfileScreen(viewModel, this@ProfileActivity) }
     }
 }

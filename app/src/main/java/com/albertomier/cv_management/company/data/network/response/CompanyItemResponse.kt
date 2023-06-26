@@ -10,6 +10,7 @@ data class CompanyItemResponse(
     @SerializedName("contactName") var contactName: String,
     @SerializedName("contactPhone") var contactPhone: String,
     @SerializedName("contactEmail") var contactEmail: String,
+    @SerializedName("description") var description: String,
     @SerializedName("createdAt") var createdAt: String,
     @SerializedName("updatedAt") var updatedAt: String
 )

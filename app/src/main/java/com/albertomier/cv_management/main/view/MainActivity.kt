@@ -10,6 +10,7 @@ import com.albertomier.cv_management.company.ui.view.CompanyDetailActivity
 import com.albertomier.cv_management.core.utils.Preferences
 import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
 import com.albertomier.cv_management.main.navigation.MyAppNavHost
+import com.albertomier.cv_management.profile.ui.view.ProfileActivity
 import com.albertomier.cv_management.ui.theme.BaseTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,11 @@ class MainActivity : ComponentActivity() {
                     onItemSelected = { goToDetailView(it) },
                     onFabButtonClick = {
                         startActivity(Intent(this, AddCompanyActivity::class.java))
-                    })
+                    },
+                    onTopBarButtonClick = {
+                        startActivity(Intent(this, ProfileActivity::class.java))
+                    }
+                )
             }
         }
     }

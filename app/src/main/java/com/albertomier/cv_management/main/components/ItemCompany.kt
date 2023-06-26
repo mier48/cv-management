@@ -12,22 +12,21 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.albertomier.cv_management.company.domain.model.CompanyItem
 import com.albertomier.cv_management.core.extensions.Height
-import com.albertomier.cv_management.core.extensions.Width
 import com.albertomier.cv_management.core.extensions.radius
-import com.albertomier.cv_management.core.extensions.validate
 import com.albertomier.cv_management.ui.theme.Typography
 
 @Composable
-fun ItemCompany(item: CompanyItem, onItemSelected: (id: Int?) -> Unit) {
+fun ItemCompany(
+    item: CompanyItem,
+    showDescription: Boolean = false,
+    onItemSelected: (id: Int?) -> Unit
+) {
     Card(
         elevation = 2.dp,
         modifier = Modifier
@@ -61,15 +60,18 @@ fun ItemCompany(item: CompanyItem, onItemSelected: (id: Int?) -> Unit) {
                 imageVector = Icons.Filled.Phone,
                 style = Typography.labelLarge
             )
-        }
-    }
-}
 
-@Composable
-fun RowData(text: String, imageVector: ImageVector, style: TextStyle = Typography.bodyLarge) {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Icon(imageVector = imageVector, contentDescription = text.validate())
-        8.Width()
-        Text(text.validate(), style = style)
+            if (showDescription) {
+                16.Height()
+
+                Row(modifier = Modifier.fillMaxWidth(), Arrangement.Center) {
+                    Text("Descripción de la empresa", style = Typography.titleLarge)
+                }
+
+                8.Height()
+
+                Text(text = item.description)
+            }
+        }
     }
 }

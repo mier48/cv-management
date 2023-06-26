@@ -25,12 +25,14 @@ import com.albertomier.cv_management.main.navigation.BottomNavigation
 fun MainScreen(
     viewModel: HomeViewModel,
     onItemSelected: (id: Int?) -> Unit,
-    onFabButtonClick: () -> Unit
+    onFabButtonClick: () -> Unit,
+    onTopBarButtonClick: () -> Unit
 ) {
     MainScreenContent(
         viewModel = viewModel,
         onItemSelected = onItemSelected,
-        onFabButtonClick = onFabButtonClick
+        onFabButtonClick = onFabButtonClick,
+        onTopBarButtonClick = onTopBarButtonClick,
     )
 }
 
@@ -38,7 +40,8 @@ fun MainScreen(
 private fun MainScreenContent(
     viewModel: HomeViewModel,
     onItemSelected: (id: Int?) -> Unit,
-    onFabButtonClick: () -> Unit
+    onFabButtonClick: () -> Unit,
+    onTopBarButtonClick: () -> Unit
 ) {
     val selectedItem = remember { mutableStateOf(0) }
     val bottomBarNavHostController = rememberNavController()
@@ -55,7 +58,7 @@ private fun MainScreenContent(
             TopAppBarMain(
                 tint = MaterialTheme.colorScheme.surface,
                 color = MaterialTheme.colorScheme.primary
-            )
+            ) { onTopBarButtonClick() }
         },
         bottomBar = {
             BottomAppBarMain(

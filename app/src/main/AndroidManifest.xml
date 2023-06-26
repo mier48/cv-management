@@ -27,6 +27,7 @@
         <activity android:name="com.albertomier.cv_management.login.ui.view.LoginActivity" />
         <activity android:name="com.albertomier.cv_management.company.ui.view.AddCompanyActivity" />
         <activity android:name="com.albertomier.cv_management.company.ui.view.CompanyDetailActivity" />
+        <activity android:name="com.albertomier.cv_management.profile.ui.view.ProfileActivity" />
     </application>
 
 </manifest>

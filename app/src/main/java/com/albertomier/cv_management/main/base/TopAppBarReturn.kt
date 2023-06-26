@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import com.albertomier.cv_management.ui.theme.Typography
 
 
@@ -21,7 +22,8 @@ fun TopAppBarReturn(
     title: String,
     activity: Activity,
     color: Color = Color.Transparent,
-    tint: Color = Color.Red
+    tint: Color = Color.Red,
+    navigationController: NavHostController? = null
 ) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -32,7 +34,15 @@ fun TopAppBarReturn(
             Text(text = title, color = tint, style = Typography.titleLarge)
         },
         navigationIcon = {
-            IconButton(onClick = { activity.finish() }) {
+            IconButton(
+                onClick = {
+                    if (navigationController == null) {
+                        activity.finish()
+                    } else {
+                        navigationController.popBackStack()
+                    }
+                }
+            ) {
                 Icon(
                     tint = tint,
                     imageVector = Icons.Filled.ArrowBack,

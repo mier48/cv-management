@@ -43,7 +43,7 @@ fun HomeScreen(
     LazyColumn(state = listState) {
         items(companyList) { item ->
             Row {
-                ItemCompany(item, onItemSelected)
+                ItemCompany(item = item, onItemSelected = onItemSelected)
             }
         }
     }

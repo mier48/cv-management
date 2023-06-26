@@ -17,4 +17,11 @@ sealed class Screens(val route: String) {
     object Register : Screens("register")
     object AuthorDetail : Screens("author_detail")
     object PostDetail : Screens("post_detail")
+    object AddInterview : Screens("add_interview")
+    object CompanyDetail : Screens("company_detail")
+    object UpdateInterviewDetail :
+        Screens("update_interview_detail?id={id}&date={date}&hour={hour}&comment={comment}&done={done}") {
+        fun createRoute(id: Int, date: String, hour: String, comment: String, done: Int) =
+            "update_interview_detail?id=$id&date=$date&hour=$hour&comment=$comment&done=$done"
+    }
 }

@@ -13,10 +13,11 @@ data class CompanyItem(
     val contactName: String,
     val contactPhone: String,
     val contactEmail: String,
+    val description: String,
     val createdAt: String,
     val updatedAt: String
 ) : Parcelable {
-    constructor() : this(0, "", "", "", "", "", "", "", "")
+    constructor() : this(0, "", "", "", "", "", "", "", "", "")
 }
 
 fun CompanyItemResponse.toDomain() = CompanyItem(
@@ -27,6 +28,7 @@ fun CompanyItemResponse.toDomain() = CompanyItem(
     contactName = contactName,
     contactPhone = contactPhone,
     contactEmail = contactEmail,
+    description = description,
     createdAt = createdAt,
     updatedAt = updatedAt
 )

@@ -4,17 +4,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.sp
 import com.albertomier.cv_management.core.extensions.radius
-import com.albertomier.cv_management.ui.theme.primaryTextStyle
-import com.albertomier.cv_management.ui.theme.secondaryTextStyle
 
 @Composable
 fun TextFieldRounded(
@@ -29,6 +25,10 @@ fun TextFieldRounded(
     cursorColor: Color = MaterialTheme.colorScheme.error,
     focusedLabelColor: Color = MaterialTheme.colorScheme.primary,
     containerColor: Color = MaterialTheme.colorScheme.background,
+    minLines: Int = 1,
+    maxLines: Int = 1,
+    readOnly: Boolean = false,
+    enabled: Boolean = true,
     onValueChanged: (value: String) -> Unit
 ) {
     OutlinedTextField(
@@ -42,7 +42,11 @@ fun TextFieldRounded(
         },
         shape = shape,
         singleLine = singleLine,
+        minLines = minLines,
+        maxLines = maxLines,
         onValueChange = { onValueChanged(it) },
         keyboardOptions = keyboardOptions,
+        readOnly = readOnly,
+        enabled = enabled
     )
 }
