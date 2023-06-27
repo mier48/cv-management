@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -16,19 +18,21 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.albertomier.cv_management.main.base.Title
 import com.albertomier.cv_management.main.components.DefaultButton
 import com.albertomier.cv_management.main.components.TextFieldRounded
-import com.albertomier.cv_management.profile.data.Experience
 import com.albertomier.cv_management.profile.ui.viewmodel.ProfileViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun AddExperienceSheetContent(
     context: Context,
@@ -38,12 +42,17 @@ fun AddExperienceSheetContent(
     viewModel: ProfileViewModel,
     onAddClicked: () -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     val exCompanyName: String by viewModel.exCompanyName.observeAsState(initial = "")
     val exJobTitle: String by viewModel.exJobTitle.observeAsState(initial = "")
     val exLocation: String by viewModel.exLocation.observeAsState(initial = "")
     val exStartDate: String by viewModel.exStartDate.observeAsState(initial = "")
     val exEndDate: String by viewModel.exEndDate.observeAsState(initial = "")
     val exDescription: String by viewModel.exDescription.observeAsState(initial = "")
+    val isSaveExperienceDataEnabled: Boolean by viewModel.isSaveExperienceDataEnabled.observeAsState(
+        initial = false
+    )
 
     Column(
         modifier = Modifier
@@ -141,7 +150,12 @@ fun AddExperienceSheetContent(
             placeholder = "Añade una descripción del puesto",
             singleLine = false,
             minLines = 3,
-            maxLines = 6
+            maxLines = 6,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
         ) { value ->
             viewModel.onExperienceDataChanged(
                 company = exCompanyName,
@@ -156,9 +170,9 @@ fun AddExperienceSheetContent(
         DefaultButton(
             text = "Añadir Experiencia",
             modifier = Modifier.fillMaxWidth(),
-            enabled = false,
+            enabled = isSaveExperienceDataEnabled,
             onButtonClick = {
-                val experience = Experience(
+                viewModel.saveExperienceData(
                     company = exCompanyName,
                     jobTitle = exJobTitle,
                     location = exLocation,
@@ -166,8 +180,6 @@ fun AddExperienceSheetContent(
                     endDate = exEndDate,
                     description = exDescription
                 )
-
-                viewModel.addExperienceItem(experience)
 
                 scope.launch {
                     modalBottomSheetState.hide()

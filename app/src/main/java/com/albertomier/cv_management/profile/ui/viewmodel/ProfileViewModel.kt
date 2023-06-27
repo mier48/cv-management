@@ -1,16 +1,15 @@
 package com.albertomier.cv_management.profile.ui.viewmodel
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.albertomier.cv_management.company.domain.model.CompanyItem
 import com.albertomier.cv_management.core.extensions.isValidEmail
 import com.albertomier.cv_management.core.network.ApiResponseStatus
 import com.albertomier.cv_management.main.data.SheetContentState
 import com.albertomier.cv_management.profile.data.Experience
+import com.albertomier.cv_management.profile.domain.AddExperienceUseCase
+import com.albertomier.cv_management.profile.domain.AddPersonalInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor() : ViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val addExperienceUseCase: AddExperienceUseCase,
+    private val addPersonalInfoUseCase: AddPersonalInfoUseCase
+) : ViewModel() {
 
     private var _sheetStateContent: MutableStateFlow<SheetContentState> =
         MutableStateFlow(SheetContentState.ADD)
@@ -99,8 +101,8 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     private val _exDescription = MutableLiveData<String>()
     val exDescription: LiveData<String> = _exDescription
 
-    private var _experienceList = mutableStateListOf<Experience>()
-    val experienceList: SnapshotStateList<Experience> = _experienceList
+    private var _experienceList = MutableLiveData<List<Experience>>()
+    val experienceList: LiveData<List<Experience>> = _experienceList
 
     private val _isSaveExperienceDataEnabled = MutableLiveData<Boolean>()
     val isSaveExperienceDataEnabled: LiveData<Boolean> = _isSaveExperienceDataEnabled
@@ -139,12 +141,12 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onExperienceDataChanged(
-        company : String,
-        jobTitle : String,
-        location : String,
-        startDate : String,
-        endDate : String,
-        description : String
+        company: String,
+        jobTitle: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
     ) {
         _exCompanyName.value = company
         _exJobTitle.value = jobTitle
@@ -156,7 +158,7 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         _isSaveExperienceDataEnabled.value = company.isNotEmpty()
                 && jobTitle.isNotEmpty()
                 && location.isNotEmpty()
-                && startDate.isValidEmail()
+                && startDate.isNotEmpty()
                 && endDate.isNotEmpty()
                 && description.isNotEmpty()
     }
@@ -174,24 +176,24 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     ) {
         viewModelScope.launch {
             _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                addPersonalInfoUseCase(
+                    name = name,
+                    lastname = lastname,
+                    birthdate = birthdate,
+                    residencePlace = residencePlace,
+                    jobTitle = jobTitle,
+                    email = email,
+                    phone = phone,
+                    languages = languages,
+                    description = description
+                )
+            )
         }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun handleResponseStatusAddResponse(responseStatus: ApiResponseStatus<String>) {
-        _status.value = responseStatus as ApiResponseStatus<Any>
     }
 
     fun setSheetStateContent(sheetStateContent: SheetContentState) {
         _sheetStateContent.value = sheetStateContent
-    }
-
-    fun addExperienceItem(experience: Experience) {
-        _experienceList.add(experience)
-    }
-
-    fun removeExperienceItem(experience: Experience) {
-        _experienceList.remove(experience)
     }
 
     fun resetExperienceFields() {
@@ -202,5 +204,33 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         _exEndDate.value = ""
         _exDescription.value = ""
         _isSaveExperienceDataEnabled.value = false
+    }
+
+    fun saveExperienceData(
+        company: String,
+        jobTitle: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ) {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                addExperienceUseCase(
+                    company = company,
+                    jobTitle = jobTitle,
+                    location = location,
+                    startDate = startDate,
+                    endDate = endDate,
+                    description = description
+                )
+            )
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun handleResponseStatusAddResponse(responseStatus: ApiResponseStatus<String>) {
+        _status.value = responseStatus as ApiResponseStatus<Any>
     }
 }

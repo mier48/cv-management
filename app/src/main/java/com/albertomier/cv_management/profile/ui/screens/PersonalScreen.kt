@@ -211,15 +211,15 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             enabled = isSaveDataEnabled,
             onButtonClick = {
                 viewModel.saveData(
-                    name,
-                    lastname,
-                    birthdate,
-                    residencePlace,
-                    jobTitle,
-                    email,
-                    phone,
-                    languages,
-                    description
+                    name = name,
+                    lastname = lastname,
+                    birthdate = birthdate,
+                    residencePlace = residencePlace,
+                    jobTitle = jobTitle,
+                    email = email,
+                    phone = phone,
+                    languages = languages,
+                    description = description
                 )
             })
     }

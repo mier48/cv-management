@@ -62,7 +62,7 @@ dependencies {
     // Compose
     implementation 'androidx.compose.ui:ui:1.4.3'
     implementation 'androidx.compose.ui:ui-tooling-preview:1.4.3'
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha03'
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha02'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -79,7 +79,7 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.5.2'
 
     // LiveData
-    implementation 'androidx.compose.runtime:runtime-livedata:1.6.0-alpha01'
+    implementation 'androidx.compose.runtime:runtime-livedata:1.5.0-beta02'
 
     // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.1'

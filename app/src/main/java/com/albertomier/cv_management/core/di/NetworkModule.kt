@@ -4,6 +4,7 @@ import com.albertomier.cv_management.company.data.network.CompanyClient
 import com.albertomier.cv_management.core.utils.AppConstants.BASE_URL
 import com.albertomier.cv_management.core.utils.AppConstants.DEFAULT_TIMEOUT
 import com.albertomier.cv_management.login.data.network.LoginClient
+import com.albertomier.cv_management.profile.data.network.ProfileClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +48,10 @@ object NetworkModule {
     @Provides
     fun provideCompanyClient(retrofit: Retrofit): CompanyClient =
         retrofit.create(CompanyClient::class.java)
+
+    @Singleton
+    @Provides
+    fun provideProfileClient(retrofit: Retrofit): ProfileClient =
+        retrofit.create(ProfileClient::class.java)
 
 }

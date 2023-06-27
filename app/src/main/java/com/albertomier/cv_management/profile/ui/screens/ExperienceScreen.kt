@@ -16,6 +16,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -26,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -35,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.albertomier.cv_management.company.domain.model.CompanyItem
 import com.albertomier.cv_management.main.base.FabButton
 import com.albertomier.cv_management.main.base.Title
 import com.albertomier.cv_management.main.data.SheetContentState
@@ -54,13 +57,13 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
 
     val sheetStateContent by viewModel.sheetStateContent.collectAsState()
 
-    val listOfExperience = remember { viewModel.experienceList }
+    val listOfExperience: List<Experience> by viewModel.experienceList.observeAsState(initial = emptyList())
 
     ModalBottomSheetLayout(
         scrimColor = Color.Black.copy(alpha = 0.6f),
         sheetState = modalBottomSheetState,
         sheetElevation = 8.dp,
-        sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+        sheetShape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp),
         sheetBackgroundColor = MaterialTheme.colors.background,
         sheetContent = {
             when (sheetStateContent) {
@@ -72,19 +75,7 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
                         scope = scope,
                         viewModel = viewModel,
                         onAddClicked = {
-//                            val experience = Experience(
-//                                employer = mainViewModel.employer.value,
-//                                position = mainViewModel.position.value,
-//                                fromYear = mainViewModel.yearOfStart.value,
-//                                stillWorking = mainViewModel.stillWorking.value,
-//                                endYear = if (mainViewModel.stillWorking.value) "" else mainViewModel.yearOfEnding.value,
-//                                comment = mainViewModel.experienceComment.value
-//                            )
-//                            mainViewModel.addExperienceItem(experience)
-//                            scope.launch {
-//                                modalBottomSheetState.hide()
-//                            }
-//                            mainViewModel.resetExperienceFields()
+
                         }
                     )
                 }
@@ -93,14 +84,7 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
                         context = context,
                         mainViewModel = viewModel,
                         onSaveClicked = {
-//                            mainViewModel.updateExperienceItem(
-//                                index = listOfExperience.indexOf(mainViewModel.selectedExperienceItem.value),
-//                                experience = it
-//                            )
-//                            scope.launch {
-//                                modalBottomSheetState.hide()
-//                            }
-//                            mainViewModel.resetExperienceFields()
+
                         }
                     )
                 }
