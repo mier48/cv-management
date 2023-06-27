@@ -62,7 +62,7 @@ dependencies {
     // Compose
     implementation 'androidx.compose.ui:ui:1.4.3'
     implementation 'androidx.compose.ui:ui-tooling-preview:1.4.3'
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha02'
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha03'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -75,11 +75,11 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     // Room
-    implementation 'androidx.room:room-ktx:2.5.1'
-    kapt 'androidx.room:room-compiler:2.5.1'
+    implementation 'androidx.room:room-ktx:2.5.2'
+    kapt 'androidx.room:room-compiler:2.5.2'
 
     // LiveData
-    implementation 'androidx.compose.runtime:runtime-livedata:1.5.0-beta02'
+    implementation 'androidx.compose.runtime:runtime-livedata:1.6.0-alpha01'
 
     // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
@@ -98,6 +98,9 @@ dependencies {
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10'
+
+    // Swipe
+    implementation 'me.saket.swipe:swipe:1.0.0'
 
     // navigation animation
     implementation 'com.google.accompanist:accompanist-navigation-animation:0.28.0'

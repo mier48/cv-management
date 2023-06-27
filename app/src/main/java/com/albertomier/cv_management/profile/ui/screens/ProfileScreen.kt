@@ -64,6 +64,8 @@ fun TabsWithStyle(viewModel: ProfileViewModel) {
 
         when (tabIndex) {
             0 -> PersonalScreen(viewModel)
+            1 -> EducationScreen(viewModel)
+            2 -> ExperienceScreen(viewModel)
         }
     }
 }
