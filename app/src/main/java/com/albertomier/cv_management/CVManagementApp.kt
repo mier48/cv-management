@@ -5,7 +5,7 @@ import com.albertomier.cv_management.core.utils.SharedPreferenceUtils
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class CVManagementApp  : Application() {
+class CVManagementApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
