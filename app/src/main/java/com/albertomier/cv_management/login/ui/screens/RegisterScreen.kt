@@ -32,6 +32,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -62,12 +63,12 @@ import com.albertomier.cv_management.R
 import com.albertomier.cv_management.core.extensions.Height
 import com.albertomier.cv_management.core.extensions.assetsToBitmap
 import com.albertomier.cv_management.core.extensions.radius
+import com.albertomier.cv_management.core.utils.ic_background
+import com.albertomier.cv_management.core.utils.ic_logo
 import com.albertomier.cv_management.login.ui.viewmodel.LoginViewModel
 import com.albertomier.cv_management.ui.theme.boldTextStyle
 import com.albertomier.cv_management.ui.theme.primaryTextStyle
 import com.albertomier.cv_management.ui.theme.secondaryTextStyle
-import com.albertomier.cv_management.core.utils.ic_background
-import com.albertomier.cv_management.core.utils.ic_logo
 
 @Composable
 fun RegisterScreen(loginViewModel: LoginViewModel, navigationController: NavHostController) {
@@ -315,9 +316,9 @@ fun Name(
     OutlinedTextField(
         value = name,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         leadingIcon = {
             Card(
@@ -384,9 +385,9 @@ fun Email(
     OutlinedTextField(
         value = email,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         leadingIcon = {
             Card(
@@ -453,9 +454,9 @@ fun Password(
     OutlinedTextField(
         value = password,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         leadingIcon = {
             Card(
@@ -536,9 +537,9 @@ fun ConfirmPassword(
     OutlinedTextField(
         value = confirmPassword,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         leadingIcon = {
             Card(
