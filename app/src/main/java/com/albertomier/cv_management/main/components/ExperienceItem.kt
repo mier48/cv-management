@@ -11,18 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.albertomier.cv_management.core.extensions.radius
-import com.albertomier.cv_management.profile.domain.model.EducationData
 import com.albertomier.cv_management.profile.domain.model.ExperienceData
 import com.albertomier.cv_management.ui.theme.Typography
 
 @Composable
-fun ExperienceItem(item: ExperienceData) {
+fun ExperienceItem(item: ExperienceData, onClick: (item: ExperienceData) -> Unit) {
     Card(
         elevation = 2.dp,
         modifier = Modifier
             .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
             .fillMaxWidth()
-            .clickable { },
+            .clickable { onClick(item) },
         shape = 8.radius(),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

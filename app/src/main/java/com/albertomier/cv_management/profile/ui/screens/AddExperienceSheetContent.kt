@@ -40,6 +40,7 @@ fun AddExperienceSheetContent(
     modalBottomSheetState: ModalBottomSheetState,
     scope: CoroutineScope,
     viewModel: ProfileViewModel,
+    update: Boolean = false,
     onAddClicked: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -66,7 +67,7 @@ fun AddExperienceSheetContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Title(title = "Añade la información de tu experiencia")
+            Title(title = if (update) "Actualiza la información de tu experiencia" else "Añade la información de tu experiencia")
         }
         Spacer(modifier = Modifier.height(16.dp))
         TextFieldRounded(
@@ -168,7 +169,7 @@ fun AddExperienceSheetContent(
         }
         Spacer(modifier = Modifier.height(16.dp))
         DefaultButton(
-            text = "Añadir Experiencia",
+            text = if (update) "Modificar experiencia" else "Añadir experiencia",
             modifier = Modifier.fillMaxWidth(),
             enabled = isSaveExperienceDataEnabled,
             onButtonClick = {

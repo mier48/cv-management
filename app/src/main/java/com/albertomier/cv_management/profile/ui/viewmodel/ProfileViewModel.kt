@@ -409,6 +409,16 @@ class ProfileViewModel @Inject constructor(
             _languages.value = data.languages
             _description.value = data.description
             _isPersonalDataGetFromApi.value = true
+
+            _isSaveDataEnabled.value = data.name.isNotEmpty()
+                    && data.lastname.isNotEmpty()
+                    && data.birthdate.isNotEmpty()
+                    && data.residencePlace.isNotEmpty()
+                    && data.jobTitle.isNotEmpty()
+                    && data.email.isValidEmail()
+                    && data.phone.isNotEmpty()
+                    && data.languages.isNotEmpty()
+                    && data.description.isNotEmpty()
         }
 
         _status.value = responseStatus as ApiResponseStatus<Any>
@@ -430,5 +440,21 @@ class ProfileViewModel @Inject constructor(
         }
 
         _status.value = responseStatus as ApiResponseStatus<Any>
+    }
+
+    fun showExperienceData(experienceData: ExperienceData) {
+        _exCompanyName.value = experienceData.company
+        _exJobTitle.value = experienceData.jobTitle
+        _exLocation.value = experienceData.location
+        _exStartDate.value = experienceData.startDate
+        _exEndDate.value = experienceData.endDate
+        _exDescription.value = experienceData.description
+
+        _isSaveExperienceDataEnabled.value = experienceData.company.isNotEmpty()
+                && experienceData.jobTitle.isNotEmpty()
+                && experienceData.location.isNotEmpty()
+                && experienceData.startDate.isNotEmpty()
+                && experienceData.endDate.isNotEmpty()
+                && experienceData.description.isNotEmpty()
     }
 }
