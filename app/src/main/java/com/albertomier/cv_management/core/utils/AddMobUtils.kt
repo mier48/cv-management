@@ -1,8 +1,5 @@
 package com.albertomier.cv_management.core.utils
 
-import android.content.Context
-import android.util.Log
-
 //var mInterstitialAd: InterstitialAd? = null
 //
 ////load the interstitial ad

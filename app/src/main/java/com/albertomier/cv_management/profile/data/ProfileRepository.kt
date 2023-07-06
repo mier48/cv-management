@@ -73,25 +73,6 @@ class ProfileRepository @Inject constructor(private val profileService: ProfileS
             ).response
         }
 
-    suspend fun updateEducationData(
-        school: String,
-        title: String,
-        location: String,
-        startDate: String,
-        endDate: String,
-        description: String
-    ): ApiResponseStatus<String> =
-        makeNetworkCall {
-            profileService.updateEducationData(
-                school = school,
-                title = title,
-                location = location,
-                startDate = startDate,
-                endDate = endDate,
-                description = description
-            ).response
-        }
-
     suspend fun addPersonalData(
         name: String,
         lastname: String,
@@ -117,6 +98,9 @@ class ProfileRepository @Inject constructor(private val profileService: ProfileS
             ).response
         }
 
+    /**
+     * UPDATE DATA
+     */
     suspend fun updatePersonalData(
         name: String,
         lastname: String,
@@ -138,6 +122,44 @@ class ProfileRepository @Inject constructor(private val profileService: ProfileS
                 email = email,
                 phone = phone,
                 languages = languages,
+                description = description
+            ).response
+        }
+
+    suspend fun updateEducationData(
+        school: String,
+        title: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ): ApiResponseStatus<String> =
+        makeNetworkCall {
+            profileService.updateEducationData(
+                school = school,
+                title = title,
+                location = location,
+                startDate = startDate,
+                endDate = endDate,
+                description = description
+            ).response
+        }
+
+    suspend fun updateExperienceData(
+        company: String,
+        jobTitle: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ): ApiResponseStatus<String> =
+        makeNetworkCall {
+            profileService.updateExperienceData(
+                company = company,
+                jobTitle = jobTitle,
+                location = location,
+                startDate = startDate,
+                endDate = endDate,
                 description = description
             ).response
         }

@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.albertomier.cv_management.home.ui.screens.HomeScreen
 import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
-import com.albertomier.cv_management.profile.ui.screens.ProfileScreen
 
 @Composable
 fun BottomNavigation(

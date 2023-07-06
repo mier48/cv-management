@@ -40,6 +40,7 @@ fun AddEducationSheetContent(
     modalBottomSheetState: ModalBottomSheetState,
     scope: CoroutineScope,
     viewModel: ProfileViewModel,
+    update: Boolean = false,
     onAddClicked: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -51,7 +52,9 @@ fun AddEducationSheetContent(
     val edEndDate: String by viewModel.edEndDate.observeAsState(initial = "")
     val edDescription: String by viewModel.edDescription.observeAsState(initial = "")
     val isDataGetFromApi: Boolean by viewModel.isEducationDataGetFromApi.observeAsState(initial = false)
-    val isSaveEducationDataEnabled: Boolean by viewModel.isSaveEducationDataEnabled.observeAsState(initial = false)
+    val isSaveEducationDataEnabled: Boolean by viewModel.isSaveEducationDataEnabled.observeAsState(
+        initial = false
+    )
 
     Column(
         modifier = Modifier
@@ -65,7 +68,7 @@ fun AddEducationSheetContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Title(title = "Añade la información de tus estudios")
+            Title(title = if (update) "Modifica la información de tus estudios" else "Añade la información de tus estudios")
         }
         Spacer(modifier = Modifier.height(16.dp))
         TextFieldRounded(
@@ -167,11 +170,11 @@ fun AddEducationSheetContent(
         }
         Spacer(modifier = Modifier.height(16.dp))
         DefaultButton(
-            text = if (isDataGetFromApi) "Guardar datos" else "Añadir datos",
+            text = if (update) "Modificar datos" else "Añadir datos",
             modifier = Modifier.fillMaxWidth(),
             enabled = isSaveEducationDataEnabled,
             onButtonClick = {
-                if (isDataGetFromApi) {
+                if (update) {
                     viewModel.updateEducationData(
                         school = edSchool,
                         title = edTitle,

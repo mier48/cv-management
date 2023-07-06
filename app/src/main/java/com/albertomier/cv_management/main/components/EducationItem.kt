@@ -15,13 +15,13 @@ import com.albertomier.cv_management.profile.domain.model.EducationData
 import com.albertomier.cv_management.ui.theme.Typography
 
 @Composable
-fun EducationItem(item: EducationData) {
+fun EducationItem(item: EducationData, onClick: (item: EducationData) -> Unit) {
     Card(
         elevation = 2.dp,
         modifier = Modifier
             .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
             .fillMaxWidth()
-            .clickable { },
+            .clickable { onClick(item) },
         shape = 8.radius(),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

@@ -109,7 +109,7 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
                             items(listOfExperience) { item ->
                                 ExperienceItem(item) {
                                     with(viewModel) {
-                                        updateExperienceData(item)
+                                        showExperienceData(item)
                                         setSheetStateContent(SheetContentState.UPDATE)
                                     }
                                     scope.launch {

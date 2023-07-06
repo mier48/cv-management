@@ -64,10 +64,14 @@ fun EducationScreen(viewModel: ProfileViewModel) {
                     )
                 }
                 SheetContentState.UPDATE -> {
-                    UpdateEducationSheetContent(
+                    AddEducationSheetContent(
                         context = context,
                         mainViewModel = viewModel,
-                        onSaveClicked = {
+                        modalBottomSheetState = modalBottomSheetState,
+                        scope = scope,
+                        viewModel = viewModel,
+                        update = true,
+                        onAddClicked = {
 
                         }
                     )
@@ -103,7 +107,15 @@ fun EducationScreen(viewModel: ProfileViewModel) {
                                 .background(color = MaterialTheme.colors.background)
                         ) {
                             items(listOfEducation) { item ->
-                                EducationItem(item = item)
+                                EducationItem(item = item) {
+                                    with(viewModel) {
+                                        showEducationData(item)
+                                        setSheetStateContent(SheetContentState.UPDATE)
+                                    }
+                                    scope.launch {
+                                        modalBottomSheetState.show()
+                                    }
+                                }
                             }
                         }
                     }

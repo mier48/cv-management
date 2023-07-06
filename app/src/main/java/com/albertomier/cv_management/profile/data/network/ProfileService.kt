@@ -158,6 +158,30 @@ class ProfileService @Inject constructor(private val profileClient: ProfileClien
         }
     }
 
+    suspend fun updateExperienceData(
+        company: String,
+        jobTitle: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ): SuccessResponse {
+        return withContext(Dispatchers.IO) {
+            val response: Response<AddExperienceResponse> = profileClient.updateExperienceData(
+                Utils.getAuthorization(),
+                AddExperienceData(
+                    company = company,
+                    jobTitle = jobTitle,
+                    location = location,
+                    startDate = startDate,
+                    endDate = endDate,
+                    description = description
+                )
+            )
+            response.body()!!.data
+        }
+    }
+
     suspend fun updatePersonalData(
         name: String,
         lastname: String,

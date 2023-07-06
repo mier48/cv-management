@@ -1,7 +1,6 @@
 package com.albertomier.cv_management.profile.domain.model
 
 import android.os.Parcelable
-import com.albertomier.cv_management.profile.data.network.response.EducationDataResponse
 import com.albertomier.cv_management.profile.data.network.response.ExperienceDataResponse
 import kotlinx.parcelize.Parcelize
 

@@ -39,7 +39,10 @@ class LoginActivity : ComponentActivity() {
             BaseTheme {
                 val navigationController = rememberNavController()
 
-                NavHost(navController = navigationController, startDestination = Screens.Login.route) {
+                NavHost(
+                    navController = navigationController,
+                    startDestination = Screens.Login.route
+                ) {
                     composable(Screens.Login.route) {
                         LoginScreen(loginViewModel, navigationController)
                     }

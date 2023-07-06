@@ -7,5 +7,6 @@ import javax.inject.Inject
 
 class GetEducationDataUseCase @Inject constructor(private val repository: ProfileRepository) {
 
-    suspend operator fun invoke(): ApiResponseStatus<List<EducationData>> = repository.getEducationData()
+    suspend operator fun invoke(): ApiResponseStatus<List<EducationData>> =
+        repository.getEducationData()
 }

@@ -173,35 +173,30 @@ fun AddExperienceSheetContent(
             modifier = Modifier.fillMaxWidth(),
             enabled = isSaveExperienceDataEnabled,
             onButtonClick = {
-                viewModel.saveExperienceData(
-                    company = exCompanyName,
-                    jobTitle = exJobTitle,
-                    location = exLocation,
-                    startDate = exStartDate,
-                    endDate = exEndDate,
-                    description = exDescription
-                )
+                if (update) {
+                    viewModel.updateExperienceData(
+                        company = exCompanyName,
+                        jobTitle = exJobTitle,
+                        location = exLocation,
+                        startDate = exStartDate,
+                        endDate = exEndDate,
+                        description = exDescription
+                    )
+                } else {
+                    viewModel.saveExperienceData(
+                        company = exCompanyName,
+                        jobTitle = exJobTitle,
+                        location = exLocation,
+                        startDate = exStartDate,
+                        endDate = exEndDate,
+                        description = exDescription
+                    )
+                }
 
                 scope.launch {
                     modalBottomSheetState.hide()
                 }
                 viewModel.resetExperienceFields()
             })
-    }
-}
-
-@Composable
-fun UpdateExperienceSheetContent(
-    context: Context,
-    mainViewModel: ProfileViewModel,
-    onSaveClicked: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background)
-            .verticalScroll(rememberScrollState())
-    ) {
-
     }
 }

@@ -38,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -397,9 +398,9 @@ fun PasswordTextField(
     OutlinedTextField(
         value = password,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         leadingIcon = {
             Card(
@@ -485,9 +486,9 @@ fun EmailTextField(
     OutlinedTextField(
         value = email,
         shape = 16.radius(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = Color.Gray.copy(0.1f)
+            unfocusedBorderColor = Color.Gray.copy(0.1f),
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         leadingIcon = {

@@ -13,6 +13,8 @@ import com.albertomier.cv_management.profile.domain.AddPersonalDataUseCase
 import com.albertomier.cv_management.profile.domain.GetEducationDataUseCase
 import com.albertomier.cv_management.profile.domain.GetExperienceDataUseCase
 import com.albertomier.cv_management.profile.domain.GetPersonalDataUseCase
+import com.albertomier.cv_management.profile.domain.UpdateEducationDataUseCase
+import com.albertomier.cv_management.profile.domain.UpdateExperienceDataUseCase
 import com.albertomier.cv_management.profile.domain.UpdatePersonalInfoUseCase
 import com.albertomier.cv_management.profile.domain.model.EducationData
 import com.albertomier.cv_management.profile.domain.model.ExperienceData
@@ -32,6 +34,8 @@ class ProfileViewModel @Inject constructor(
     private val addPersonalInfoUseCase: AddPersonalDataUseCase,
     private val addEducationDataUseCase: AddEducationDataUseCase,
     private val updatePersonalInfoUseCase: UpdatePersonalInfoUseCase,
+    private val updateEducationDataUseCase: UpdateEducationDataUseCase,
+    private val updateExperienceDataUseCase: UpdateExperienceDataUseCase
 ) : ViewModel() {
 
     private var _sheetStateContent: MutableStateFlow<SheetContentState> =
@@ -343,6 +347,29 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun updateExperienceData(
+        company: String,
+        jobTitle: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ) {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                updateExperienceDataUseCase(
+                    company = company,
+                    jobTitle = jobTitle,
+                    location = location,
+                    startDate = startDate,
+                    endDate = endDate,
+                    description = description
+                )
+            )
+        }
+    }
+
     fun saveEducationData(
         school: String,
         title: String,
@@ -377,7 +404,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             _status.value = ApiResponseStatus.Loading()
             handleResponseStatusAddResponse(
-                addEducationDataUseCase(
+                updateEducationDataUseCase(
                     school = school,
                     title = title,
                     location = location,
@@ -456,5 +483,21 @@ class ProfileViewModel @Inject constructor(
                 && experienceData.startDate.isNotEmpty()
                 && experienceData.endDate.isNotEmpty()
                 && experienceData.description.isNotEmpty()
+    }
+
+    fun showEducationData(educationData: EducationData) {
+        _edSchool.value = educationData.centerName
+        _edTitle.value = educationData.title
+        _edLocation.value = educationData.location
+        _edStartDate.value = educationData.startDate
+        _edEndDate.value = educationData.endDate
+        _edDescription.value = educationData.description
+
+        _isSaveExperienceDataEnabled.value = educationData.centerName.isNotEmpty()
+                && educationData.title.isNotEmpty()
+                && educationData.location.isNotEmpty()
+                && educationData.startDate.isNotEmpty()
+                && educationData.endDate.isNotEmpty()
+                && educationData.description.isNotEmpty()
     }
 }
