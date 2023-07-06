@@ -23,6 +23,12 @@ import com.albertomier.cv_management.profile.ui.viewmodel.ProfileViewModel
 
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel, activity: ProfileActivity) {
+    with(viewModel) {
+        getPersonalData()
+        getEducationData()
+        getExperienceData()
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

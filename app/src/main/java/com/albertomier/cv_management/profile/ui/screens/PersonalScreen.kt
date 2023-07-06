@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.albertomier.cv_management.main.components.DefaultButton
@@ -31,6 +32,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
     val languages: String by viewModel.languages.observeAsState(initial = "")
     val description: String by viewModel.description.observeAsState(initial = "")
     val isSaveDataEnabled: Boolean by viewModel.isSaveDataEnabled.observeAsState(initial = false)
+    val isDataGetFromApi: Boolean by viewModel.isPersonalDataGetFromApi.observeAsState(initial = false)
 
     Column(
         modifier = Modifier
@@ -43,7 +45,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Nombre",
             placeholder = "Añade el nombre"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 value,
                 lastname,
                 birthdate,
@@ -61,7 +63,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Apellidos",
             placeholder = "Añade los apellidos"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 value,
                 birthdate,
@@ -79,7 +81,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Fecha de nacimiento",
             placeholder = "Añade la fecha de nacimiento"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 value,
@@ -97,7 +99,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Lugar de residencia",
             placeholder = "Añade el lugar de residencia"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -115,7 +117,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Puesto de trabajo",
             placeholder = "Añade el puesto de trabajo"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -132,9 +134,12 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             value = email,
             label = "Email",
             placeholder = "Añade el email",
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            )
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -151,9 +156,12 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             value = phone,
             label = "Teléfono",
             placeholder = "Añade el teléfono",
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Phone,
+                imeAction = ImeAction.Next
+            )
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -171,7 +179,7 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             label = "Idiomas",
             placeholder = "Añade los idiomas que conoces"
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -190,9 +198,13 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
             placeholder = "Añade una brebe descripción",
             singleLine = false,
             minLines = 3,
-            maxLines = 6
+            maxLines = 6,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Done
+            )
         ) { value ->
-            viewModel.onDataChanged(
+            viewModel.onPersonalDataChanged(
                 name,
                 lastname,
                 birthdate,
@@ -206,21 +218,35 @@ fun PersonalScreen(viewModel: ProfileViewModel) {
         }
         Spacer(modifier = Modifier.height(16.dp))
         DefaultButton(
-            text = "Guardar datos",
+            text = if (isDataGetFromApi) "Guardar datos" else "Añadir datos",
             modifier = Modifier.fillMaxWidth(),
             enabled = isSaveDataEnabled,
             onButtonClick = {
-                viewModel.saveData(
-                    name = name,
-                    lastname = lastname,
-                    birthdate = birthdate,
-                    residencePlace = residencePlace,
-                    jobTitle = jobTitle,
-                    email = email,
-                    phone = phone,
-                    languages = languages,
-                    description = description
-                )
+                if (isDataGetFromApi) {
+                    viewModel.updateData(
+                        name = name,
+                        lastname = lastname,
+                        birthdate = birthdate,
+                        residencePlace = residencePlace,
+                        jobTitle = jobTitle,
+                        email = email,
+                        phone = phone,
+                        languages = languages,
+                        description = description
+                    )
+                } else {
+                    viewModel.saveData(
+                        name = name,
+                        lastname = lastname,
+                        birthdate = birthdate,
+                        residencePlace = residencePlace,
+                        jobTitle = jobTitle,
+                        email = email,
+                        phone = phone,
+                        languages = languages,
+                        description = description
+                    )
+                }
             })
     }
 }

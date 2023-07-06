@@ -40,8 +40,10 @@ import androidx.compose.ui.unit.dp
 import com.albertomier.cv_management.company.domain.model.CompanyItem
 import com.albertomier.cv_management.main.base.FabButton
 import com.albertomier.cv_management.main.base.Title
+import com.albertomier.cv_management.main.components.ExperienceItem
 import com.albertomier.cv_management.main.data.SheetContentState
 import com.albertomier.cv_management.profile.data.Experience
+import com.albertomier.cv_management.profile.domain.model.ExperienceData
 import com.albertomier.cv_management.profile.ui.viewmodel.ProfileViewModel
 import kotlinx.coroutines.launch
 import me.saket.swipe.SwipeAction
@@ -57,7 +59,7 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
 
     val sheetStateContent by viewModel.sheetStateContent.collectAsState()
 
-    val listOfExperience: List<Experience> by viewModel.experienceList.observeAsState(initial = emptyList())
+    val listOfExperience: List<ExperienceData> by viewModel.experienceList.observeAsState(initial = emptyList())
 
     ModalBottomSheetLayout(
         scrimColor = Color.Black.copy(alpha = 0.6f),
@@ -109,7 +111,7 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-                            Title(title = "Nothing to show here yet")
+                            Title(title = "No has añadido ninguna experiencia laboral todavía")
                         }
                     }
                     else -> {
@@ -118,95 +120,12 @@ fun ExperienceScreen(viewModel: ProfileViewModel) {
                                 .fillMaxSize()
                                 .background(color = MaterialTheme.colors.background)
                         ) {
-                            items(listOfExperience) { experience ->
-
+                            items(listOfExperience) { item ->
+                                ExperienceItem(item)
                             }
                         }
                     }
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun ExperienceInfoItem(
-    experienceInfo: Experience,
-    onItemClicked: (experienceInfo: Experience) -> Unit,
-    enableDeleteAction: Boolean = false,
-    deleteEducationalInfo: (experienceInfo: Experience) -> Unit
-) {
-    val delete = SwipeAction(
-        onSwipe = {
-            deleteEducationalInfo(experienceInfo)
-        },
-        icon = {
-            Icon(
-                modifier = Modifier.padding(16.dp),
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Delete icon",
-                tint = Color.White
-            )
-        },
-        background = MaterialTheme.colors.error    )
-    SwipeableActionsBox(
-        modifier = Modifier
-            .padding(8.dp)
-            .clip(RoundedCornerShape(16.dp)),
-        swipeThreshold = 120.dp,
-        endActions = if (enableDeleteAction) listOf(delete) else listOf()
-    ) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .clickable(onClick = {
-                    onItemClicked(experienceInfo)
-                }),
-            elevation = 0.dp,
-            backgroundColor = MaterialTheme.colors.surface
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 12.dp, top = 12.dp, bottom = 12.dp, end = 8.dp),
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = "Empresa: ${experienceInfo.company}",
-                    color = MaterialTheme.colors.secondary,
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "Position: ${experienceInfo.jobTitle}",
-                    color = MaterialTheme.colors.secondary,
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "Year of starting: ${experienceInfo.startDate}",
-                    color = MaterialTheme.colors.secondary,
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = if (experienceInfo.stillWorking) "Still working" else "Year of ending: ${experienceInfo.endDate}",
-                    color = MaterialTheme.colors.secondary,
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = experienceInfo.description,
-                    color = MaterialTheme.colors.secondary,
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
             }
         }
     }

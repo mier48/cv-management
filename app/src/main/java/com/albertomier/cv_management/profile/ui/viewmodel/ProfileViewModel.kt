@@ -7,9 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.albertomier.cv_management.core.extensions.isValidEmail
 import com.albertomier.cv_management.core.network.ApiResponseStatus
 import com.albertomier.cv_management.main.data.SheetContentState
-import com.albertomier.cv_management.profile.data.Experience
+import com.albertomier.cv_management.profile.domain.AddEducationDataUseCase
 import com.albertomier.cv_management.profile.domain.AddExperienceUseCase
-import com.albertomier.cv_management.profile.domain.AddPersonalInfoUseCase
+import com.albertomier.cv_management.profile.domain.AddPersonalDataUseCase
+import com.albertomier.cv_management.profile.domain.GetEducationDataUseCase
+import com.albertomier.cv_management.profile.domain.GetExperienceDataUseCase
+import com.albertomier.cv_management.profile.domain.GetPersonalDataUseCase
+import com.albertomier.cv_management.profile.domain.UpdatePersonalInfoUseCase
+import com.albertomier.cv_management.profile.domain.model.EducationData
+import com.albertomier.cv_management.profile.domain.model.ExperienceData
+import com.albertomier.cv_management.profile.domain.model.PersonalData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,8 +25,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
+    private val getPersonalInfoUseCase: GetPersonalDataUseCase,
+    private val getEducationDataUseCase: GetEducationDataUseCase,
+    private val getExperienceDataUseCase: GetExperienceDataUseCase,
     private val addExperienceUseCase: AddExperienceUseCase,
-    private val addPersonalInfoUseCase: AddPersonalInfoUseCase
+    private val addPersonalInfoUseCase: AddPersonalDataUseCase,
+    private val addEducationDataUseCase: AddEducationDataUseCase,
+    private val updatePersonalInfoUseCase: UpdatePersonalInfoUseCase,
 ) : ViewModel() {
 
     private var _sheetStateContent: MutableStateFlow<SheetContentState> =
@@ -65,20 +77,32 @@ class ProfileViewModel @Inject constructor(
     /**
      * Education
      */
-    private val _school = MutableLiveData<String>()
-    val school: LiveData<String> = _school
+    private val _edSchool = MutableLiveData<String>()
+    val edSchool: LiveData<String> = _edSchool
 
-    private val _title = MutableLiveData<String>()
-    val title: LiveData<String> = _title
+    private val _edTitle = MutableLiveData<String>()
+    val edTitle: LiveData<String> = _edTitle
 
-    private val _startDate = MutableLiveData<String>()
-    val startDate: LiveData<String> = _startDate
+    private val _edLocation = MutableLiveData<String>()
+    val edLocation: LiveData<String> = _edLocation
 
-    private val _endDate = MutableLiveData<String>()
-    val endDate: LiveData<String> = _endDate
+    private val _edStartDate = MutableLiveData<String>()
+    val edStartDate: LiveData<String> = _edStartDate
 
-    private val _isSavePersonalDataEnabled = MutableLiveData<Boolean>()
-    val isSavePersonalDataEnabled: LiveData<Boolean> = _isSavePersonalDataEnabled
+    private val _edEndDate = MutableLiveData<String>()
+    val edEndDate: LiveData<String> = _edEndDate
+
+    private val _edDescription = MutableLiveData<String>()
+    val edDescription: LiveData<String> = _edDescription
+
+    private var _educationList = MutableLiveData<List<EducationData>>()
+    val educationList: LiveData<List<EducationData>> = _educationList
+
+    private val _isSaveEducationDataEnabled = MutableLiveData<Boolean>()
+    val isSaveEducationDataEnabled: LiveData<Boolean> = _isSaveEducationDataEnabled
+
+    private val _isEducationDataGetFromApi = MutableLiveData<Boolean>()
+    val isEducationDataGetFromApi: LiveData<Boolean> = _isEducationDataGetFromApi
 
     /**
      * Experience
@@ -101,14 +125,42 @@ class ProfileViewModel @Inject constructor(
     private val _exDescription = MutableLiveData<String>()
     val exDescription: LiveData<String> = _exDescription
 
-    private var _experienceList = MutableLiveData<List<Experience>>()
-    val experienceList: LiveData<List<Experience>> = _experienceList
+    private var _experienceList = MutableLiveData<List<ExperienceData>>()
+    val experienceList: LiveData<List<ExperienceData>> = _experienceList
 
     private val _isSaveExperienceDataEnabled = MutableLiveData<Boolean>()
     val isSaveExperienceDataEnabled: LiveData<Boolean> = _isSaveExperienceDataEnabled
 
+    private val _isPersonalDataGetFromApi = MutableLiveData<Boolean>()
+    val isPersonalDataGetFromApi: LiveData<Boolean> = _isPersonalDataGetFromApi
 
-    fun onDataChanged(
+    init {
+        _isPersonalDataGetFromApi.value = false
+        _isEducationDataGetFromApi.value = false
+    }
+
+    fun getPersonalData() {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handlePersonalDataResponseStatus(getPersonalInfoUseCase())
+        }
+    }
+
+    fun getEducationData() {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleEducationDataResponseStatus(getEducationDataUseCase())
+        }
+    }
+
+    fun getExperienceData() {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleExperienceDataResponseStatus(getExperienceDataUseCase())
+        }
+    }
+
+    fun onPersonalDataChanged(
         name: String,
         lastname: String,
         birthdate: String,
@@ -132,11 +184,11 @@ class ProfileViewModel @Inject constructor(
         _isSaveDataEnabled.value = name.isNotEmpty()
                 && lastname.isNotEmpty()
                 && birthdate.isNotEmpty()
-                && residencePlace.isValidEmail()
+                && residencePlace.isNotEmpty()
                 && jobTitle.isNotEmpty()
-                && email.isNotEmpty()
+                && email.isValidEmail()
                 && phone.isNotEmpty()
-                && languages.isValidEmail()
+                && languages.isNotEmpty()
                 && description.isNotEmpty()
     }
 
@@ -158,6 +210,30 @@ class ProfileViewModel @Inject constructor(
         _isSaveExperienceDataEnabled.value = company.isNotEmpty()
                 && jobTitle.isNotEmpty()
                 && location.isNotEmpty()
+                && startDate.isNotEmpty()
+                && endDate.isNotEmpty()
+                && description.isNotEmpty()
+    }
+
+    fun onEducationDataChanged(
+        school: String,
+        title: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String,
+    ) {
+        _edSchool.value = school
+        _edTitle.value = title
+        _edLocation.value = location
+        _edStartDate.value = startDate
+        _edEndDate.value = endDate
+        _edDescription.value = description
+
+        _isSaveEducationDataEnabled.value = school.isNotEmpty()
+                && title.isNotEmpty()
+                && location.isNotEmpty()
+                && startDate.isNotEmpty()
                 && startDate.isNotEmpty()
                 && endDate.isNotEmpty()
                 && description.isNotEmpty()
@@ -192,6 +268,35 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun updateData(
+        name: String,
+        lastname: String,
+        birthdate: String,
+        residencePlace: String,
+        jobTitle: String,
+        email: String,
+        phone: String,
+        languages: String,
+        description: String
+    ) {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                updatePersonalInfoUseCase(
+                    name = name,
+                    lastname = lastname,
+                    birthdate = birthdate,
+                    residencePlace = residencePlace,
+                    jobTitle = jobTitle,
+                    email = email,
+                    phone = phone,
+                    languages = languages,
+                    description = description
+                )
+            )
+        }
+    }
+
     fun setSheetStateContent(sheetStateContent: SheetContentState) {
         _sheetStateContent.value = sheetStateContent
     }
@@ -204,6 +309,15 @@ class ProfileViewModel @Inject constructor(
         _exEndDate.value = ""
         _exDescription.value = ""
         _isSaveExperienceDataEnabled.value = false
+    }
+
+    fun resetEducationFields() {
+        _edSchool.value = ""
+        _edTitle.value = ""
+        _edStartDate.value = ""
+        _edEndDate.value = ""
+        _edDescription.value = ""
+        _isSaveEducationDataEnabled.value = false
     }
 
     fun saveExperienceData(
@@ -229,8 +343,92 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun saveEducationData(
+        school: String,
+        title: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ) {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                addEducationDataUseCase(
+                    school = school,
+                    title = title,
+                    location = location,
+                    startDate = startDate,
+                    endDate = endDate,
+                    description = description
+                )
+            )
+        }
+    }
+
+    fun updateEducationData(
+        school: String,
+        title: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        description: String
+    ) {
+        viewModelScope.launch {
+            _status.value = ApiResponseStatus.Loading()
+            handleResponseStatusAddResponse(
+                addEducationDataUseCase(
+                    school = school,
+                    title = title,
+                    location = location,
+                    startDate = startDate,
+                    endDate = endDate,
+                    description = description
+                )
+            )
+        }
+    }
+
     @Suppress("UNCHECKED_CAST")
     private fun handleResponseStatusAddResponse(responseStatus: ApiResponseStatus<String>) {
+        _status.value = responseStatus as ApiResponseStatus<Any>
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun handlePersonalDataResponseStatus(responseStatus: ApiResponseStatus<PersonalData>) {
+        if (responseStatus is ApiResponseStatus.Success) {
+            val data = responseStatus.data
+
+            _name.value = data.name
+            _lastname.value = data.lastname
+            _birthdate.value = data.birthdate
+            _residencePlace.value = data.residencePlace
+            _jobTitle.value = data.jobTitle
+            _email.value = data.email
+            _phone.value = data.phone
+            _languages.value = data.languages
+            _description.value = data.description
+            _isPersonalDataGetFromApi.value = true
+        }
+
+        _status.value = responseStatus as ApiResponseStatus<Any>
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun handleEducationDataResponseStatus(responseStatus: ApiResponseStatus<List<EducationData>>) {
+        if (responseStatus is ApiResponseStatus.Success) {
+            _educationList.value = responseStatus.data
+        }
+
+        _status.value = responseStatus as ApiResponseStatus<Any>
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun handleExperienceDataResponseStatus(responseStatus: ApiResponseStatus<List<ExperienceData>>) {
+        if (responseStatus is ApiResponseStatus.Success) {
+            _experienceList.value = responseStatus.data
+        }
+
         _status.value = responseStatus as ApiResponseStatus<Any>
     }
 }

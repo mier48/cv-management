@@ -14,7 +14,7 @@ class AddExperienceUseCase @Inject constructor(private val repository: ProfileRe
         endDate: String,
         description: String
     ): ApiResponseStatus<String> =
-        repository.addExperience(
+        repository.addExperienceData(
             company = company,
             jobTitle = jobTitle,
             location = location,
