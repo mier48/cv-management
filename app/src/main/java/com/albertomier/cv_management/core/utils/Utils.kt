@@ -1,5 +1,6 @@
 package com.albertomier.cv_management.core.utils
 
+import android.os.Environment
 import android.util.Log
 import android.util.Patterns
 import androidx.compose.ui.geometry.Rect
@@ -7,6 +8,15 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Utils {
 
@@ -31,6 +41,44 @@ object Utils {
             density: Density
         ): Outline {
             return Outline.Rectangle(Rect(0f, 0f, 100f /* width */, 131f /* height */))
+        }
+    }
+
+    fun convertTimeStampToDateAndTime(epoch: Long): String {
+        val date = Date(epoch)
+        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.US)
+        return sdf.format(date)
+    }
+
+    fun convertTimeStampToDate(epoch: Long): String {
+        val date = Date(epoch)
+        val sdf = SimpleDateFormat("yyyyMMddHHmmss", Locale.US)
+        return sdf.format(date)
+    }
+
+    fun saveFile(sourceUri: URI, name: String) {
+        val sourceFilename: String = sourceUri.path
+        val destinationFilename =
+            Environment.getExternalStorageDirectory().path + File.separatorChar + name
+        var bis: BufferedInputStream? = null
+        var bos: BufferedOutputStream? = null
+        try {
+            bis = BufferedInputStream(FileInputStream(sourceFilename))
+            bos = BufferedOutputStream(FileOutputStream(destinationFilename, false))
+            val buf = ByteArray(1024)
+            bis.read(buf)
+            do {
+                bos.write(buf)
+            } while (bis.read(buf) !== -1)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            try {
+                bis?.close()
+                bos?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 }

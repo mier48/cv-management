@@ -12,7 +12,10 @@ import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
 import com.albertomier.cv_management.main.navigation.MyAppNavHost
 import com.albertomier.cv_management.profile.ui.view.ProfileActivity
 import com.albertomier.cv_management.ui.theme.BaseTheme
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -20,6 +23,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this)
+//        val configuration =
+//            RequestConfiguration.Builder().setTestDeviceIds(Collections.singletonList("DEVICE ID"))
+//                .build()
+//        MobileAds.setRequestConfiguration(configuration)
 
         setContent {
             BaseTheme {

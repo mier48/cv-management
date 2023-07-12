@@ -48,4 +48,5 @@ object Preferences {
     const val ID = "id"
     const val AUTHOR_ID = "author_id"
     const val COMPANY_ID = "company_id"
+    const val URL = "url"
 }

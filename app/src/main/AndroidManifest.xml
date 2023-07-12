@@ -14,6 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CVManagement"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+        
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5047591243743369~2898267409"/>
+
         <activity
             android:name="com.albertomier.cv_management.splash.ui.view.SplashActivity"
             android:exported="true">
@@ -28,6 +43,8 @@
         <activity android:name="com.albertomier.cv_management.company.ui.view.AddCompanyActivity" />
         <activity android:name="com.albertomier.cv_management.company.ui.view.CompanyDetailActivity" />
         <activity android:name="com.albertomier.cv_management.profile.ui.view.ProfileActivity" />
+        <activity android:name="com.albertomier.cv_management.main.view.WebViewActivity" />
+        <activity android:name="com.albertomier.cv_management.main.view.PdfViewerActivity" />
     </application>
 
 </manifest>

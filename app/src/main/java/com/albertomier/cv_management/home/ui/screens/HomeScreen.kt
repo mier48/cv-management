@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
+import com.albertomier.cv_management.BuildConfig
 import com.albertomier.cv_management.company.domain.model.CompanyItem
 import com.albertomier.cv_management.core.network.ApiResponseStatus
 import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
+import com.albertomier.cv_management.main.components.BannerAdView
 import com.albertomier.cv_management.main.components.ItemCompany
 
 @Composable
@@ -40,6 +42,11 @@ fun HomeScreen(
 //            }
 //        }
 //    }
+
+    if (BuildConfig.FLAVOR == "free") {
+        BannerAdView()
+    }
+
     LazyColumn(state = listState) {
         items(companyList) { item ->
             Row {

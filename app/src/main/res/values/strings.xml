@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">CV-Management</string>
-
     <string name="unknow.host.exception.error">No hay conexión a internet</string>
     <string name="unknow.error">Error desconocido</string>
 

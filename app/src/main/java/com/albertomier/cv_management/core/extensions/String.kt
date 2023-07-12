@@ -1,8 +1,10 @@
 package com.albertomier.cv_management.core.extensions
 
+import android.content.Context
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,6 +16,9 @@ fun String.base64ToString() = toString(this)
 fun String.formatDate() = toDateString(this)
 
 fun String.hasContent() = checkHasContent(this)
+
+fun String.toast(context: Context, length: Int = Toast.LENGTH_SHORT) =
+    Toast.makeText(context, this, length).show()
 
 fun checkHasContent(str: String): Boolean {
     return str.isNotEmpty() && str.isNotBlank()

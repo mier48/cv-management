@@ -9,6 +9,7 @@ plugins {
 android {
     namespace 'com.albertomier.cv_management'
     compileSdk 33
+    flavorDimensions "version"
 
     defaultConfig {
         applicationId "com.albertomier.cv_management"
@@ -25,8 +26,20 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        free {
+            dimension "version"
+            versionNameSuffix '-FREE'
+            resValue "string", "app_name", "CV-Management FREE"
+        }
+        pro {
+            dimension "version"
+            resValue "string", "app_name", "CV-Management PRO"
         }
     }
 
@@ -52,12 +65,17 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.activity:activity-compose:1.7.2'
+    //implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Compose
     implementation 'androidx.compose.ui:ui:1.4.3'
@@ -78,7 +96,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.5.2'
     kapt 'androidx.room:room-compiler:2.5.2'
 
-    // LiveData
+    // LiveData*
     implementation 'androidx.compose.runtime:runtime-livedata:1.5.0-beta02'
 
     // Splash Screen
@@ -99,8 +117,17 @@ dependencies {
     // Gson
     implementation 'com.google.code.gson:gson:2.10'
 
-    // Swipe
-    implementation 'me.saket.swipe:swipe:1.0.0'
+    // Google Ads
+    implementation 'com.google.android.gms:play-services-ads:22.2.0'
+
+    // PDF Viewer
+    //implementation 'com.github.barteksc:android-pdf-viewer:1.6.0'
+
+    // The view calendar library
+    implementation 'com.kizitonwose.calendar:view:2.3.0'
+
+    // The compose calendar library
+    implementation 'com.kizitonwose.calendar:compose:2.3.0'
 
     // navigation animation
     implementation 'com.google.accompanist:accompanist-navigation-animation:0.28.0'
