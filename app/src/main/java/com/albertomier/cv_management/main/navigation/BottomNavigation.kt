@@ -6,6 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.albertomier.cv_management.home.ui.screens.CalendarScreen
+import com.albertomier.cv_management.home.ui.screens.CalendarScreen2
 import com.albertomier.cv_management.home.ui.screens.HomeScreen
 import com.albertomier.cv_management.home.ui.viewmodel.HomeViewModel
 
@@ -25,6 +27,6 @@ fun BottomNavigation(
         route = "bottomRoute"
     ) {
         composable(Screens.Home.route) { HomeScreen(viewModel, listState, onItemSelected) }
-        //composable(Screens.Profile.route) { ProfileScreen(viewModel, this@ProfileActivity) }
+        composable(Screens.Calendar.route) { CalendarScreen() }
     }
 }

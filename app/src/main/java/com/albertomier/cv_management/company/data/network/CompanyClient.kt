@@ -1,5 +1,6 @@
 package com.albertomier.cv_management.company.data.network
 
+import androidx.lifecycle.LiveData
 import com.albertomier.cv_management.company.data.network.request.AddCompanyData
 import com.albertomier.cv_management.company.data.network.request.AddInterviewData
 import com.albertomier.cv_management.company.data.network.response.AddCompanyResponse
@@ -7,6 +8,8 @@ import com.albertomier.cv_management.company.data.network.response.AddInterviewR
 import com.albertomier.cv_management.company.data.network.response.CompanyResponse
 import com.albertomier.cv_management.company.data.network.response.CompanySingleResponse
 import com.albertomier.cv_management.company.data.network.response.InterviewResponse
+import com.albertomier.cv_management.company.domain.model.CompanyItem
+import com.albertomier.cv_management.core.api.ApiResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -24,6 +27,11 @@ interface CompanyClient {
     suspend fun getCompanyList(
         @Header("Authorization") authHeader: String
     ): Response<CompanyResponse>
+
+    @GET("auth/company")
+    fun getCompanies(
+        @Header("Authorization") authHeader: String
+    ): LiveData<ApiResponse<List<CompanyItem>>>
 
     @GET("auth/company/{id}")
     suspend fun getCompanyById(

@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class GetCompanyByIdUseCase @Inject constructor(private val repository: CompanyRepository) {
 
-    suspend operator fun invoke(id: Int): ApiResponseStatus<CompanyItem> =
+    suspend operator fun invoke(id: Int): ApiResponseStatus<CompanyItem?> =
         repository.getCompanyById(id)
 }

@@ -3,6 +3,7 @@ package com.albertomier.cv_management.main.navigation
 sealed class Screens(val route: String) {
     object Splash : Screens("splash")
     object Home : Screens("home")
+    object Calendar : Screens("calendar")
     object Main : Screens("main")
     object Profile : Screens("profile")
     object AddCompany : Screens("add_company")

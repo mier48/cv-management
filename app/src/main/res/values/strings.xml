@@ -1,6 +1,7 @@
 <resources>
     <string name="unknow.host.exception.error">No hay conexión a internet</string>
     <string name="unknow.error">Error desconocido</string>
+    <string name="error.data">Error con los datos</string>
 
     <string name="email.hint">Email</string>
     <string name="invalid.email">No es un email válido</string>

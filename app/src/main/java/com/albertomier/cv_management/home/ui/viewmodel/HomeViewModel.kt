@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.albertomier.cv_management.R
 import com.albertomier.cv_management.company.domain.GetCompanyByIdUseCase
 import com.albertomier.cv_management.company.domain.GetCompanyUseCase
 import com.albertomier.cv_management.company.domain.model.CompanyItem
@@ -51,11 +52,15 @@ class HomeViewModel @Inject constructor(
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun handleResponseStatusById(responseStatus: ApiResponseStatus<CompanyItem>) {
+    private fun handleResponseStatusById(responseStatus: ApiResponseStatus<CompanyItem?>) {
         if (responseStatus is ApiResponseStatus.Success) {
             _companyItem.value = responseStatus.data
         }
 
-        _status.value = responseStatus as ApiResponseStatus<Any>
+        if (_companyItem.value == null) {
+            _status.value = ApiResponseStatus.Error(R.string.error_data)
+        } else {
+            _status.value = responseStatus as ApiResponseStatus<Any>
+        }
     }
 }

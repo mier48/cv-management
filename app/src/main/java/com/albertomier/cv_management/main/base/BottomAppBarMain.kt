@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Note
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,13 +48,9 @@ fun BottomAppBarMain(
             icon = Icons.Filled.Home
         ),
         BottomAppBarItem(
-            route = Screens.Profile.route,
-            icon = Icons.Filled.Note
-        ),
-        BottomAppBarItem(
-            route = Screens.Profile.route,
+            route = Screens.Calendar.route,
             icon = Icons.Filled.CalendarMonth
-        )
+        ),
     )
     BottomAppBar(
         modifier = Modifier.height(56.dp),

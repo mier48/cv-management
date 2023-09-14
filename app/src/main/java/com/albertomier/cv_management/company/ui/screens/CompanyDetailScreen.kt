@@ -1,5 +1,6 @@
 package com.albertomier.cv_management.company.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +24,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.albertomier.cv_management.company.domain.model.CompanyItem
@@ -29,7 +33,9 @@ import com.albertomier.cv_management.company.domain.model.InterviewItem
 import com.albertomier.cv_management.company.ui.view.CompanyDetailActivity
 import com.albertomier.cv_management.company.ui.viewmodel.CompanyViewModel
 import com.albertomier.cv_management.core.extensions.Height
+import com.albertomier.cv_management.core.network.ApiResponseStatus
 import com.albertomier.cv_management.main.base.FabButton
+import com.albertomier.cv_management.main.base.ShowProgressIndicator
 import com.albertomier.cv_management.main.base.TopAppBarReturn
 import com.albertomier.cv_management.main.components.ItemCompany
 import com.albertomier.cv_management.main.components.ItemInterview
@@ -40,8 +46,9 @@ import com.albertomier.cv_management.ui.theme.Typography
 fun CompanyDetailScreen(
     viewModel: CompanyViewModel,
     activity: CompanyDetailActivity,
-    navController: NavHostController,
+    navController: NavHostController
 ) {
+    val context = LocalContext.current
     val listState = rememberLazyListState()
     val fabVisibility by derivedStateOf {
         listState.firstVisibleItemIndex == 0
@@ -50,6 +57,41 @@ fun CompanyDetailScreen(
     val item: CompanyItem by viewModel.companyItem.observeAsState(initial = CompanyItem())
     val interviewList: List<InterviewItem> by viewModel.interviewList.observeAsState(initial = emptyList())
 
+    val status by viewModel.status.observeAsState(initial = ApiResponseStatus.Loading())
+
+    when (status) {
+        is ApiResponseStatus.Error -> {
+            Toast.makeText(
+                context,
+                stringResource((status as ApiResponseStatus.Error<Any>).messageId),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        is ApiResponseStatus.Loading -> {
+            ShowProgressIndicator()
+        }
+        is ApiResponseStatus.Success -> {
+            Content(
+                item = item,
+                activity = activity,
+                navController = navController,
+                fabVisibility = fabVisibility,
+                interviewList = interviewList,
+                listState = listState
+            )
+        }
+    }
+}
+
+@Composable
+private fun Content(
+    item: CompanyItem,
+    activity: CompanyDetailActivity,
+    navController: NavHostController,
+    fabVisibility: Boolean,
+    interviewList: List<InterviewItem>,
+    listState: LazyListState
+) {
     var visible by remember { mutableStateOf(true) }
 
     Scaffold(

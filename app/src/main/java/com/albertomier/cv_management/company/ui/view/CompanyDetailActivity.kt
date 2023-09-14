@@ -1,6 +1,7 @@
 package com.albertomier.cv_management.company.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -29,8 +30,9 @@ class CompanyDetailActivity : ComponentActivity() {
         id = intent.getIntExtra(Preferences.COMPANY_ID, 0)
 
         with(viewModel) {
-            getCompanyById(id)
-            getInterviewList(id)
+            Log.e("AMIER", "DDDDDDDDDDDDDDDDDDDDD")
+            getCompanyById(0)
+            getInterviewList(0)
         }
 
         setContent {
@@ -82,9 +84,9 @@ class CompanyDetailActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
 
-        with(viewModel) {
-            getCompanyById(id)
-            getInterviewList(id)
-        }
+//        with(viewModel) {
+//            getCompanyById(id)
+//            getInterviewList(id)
+//        }
     }
 }

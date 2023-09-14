@@ -31,11 +31,16 @@ class CompanyService @Inject constructor(private val companyClient: CompanyClien
         }
     }
 
-    suspend fun getCompanyById(id: Int): CompanyItemResponse {
+    suspend fun getCompanyById(id: Int): CompanyItemResponse? {
         return withContext(Dispatchers.IO) {
             val response: Response<CompanySingleResponse> =
                 companyClient.getCompanyById(Utils.getAuthorization(), id)
-            response.body()!!.data
+
+            if (response.isSuccessful) {
+                response.body()?.data!!
+            } else {
+                null
+            }
         }
     }
 
