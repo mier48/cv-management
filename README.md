@@ -1,9 +1,11 @@
 # CV Management
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Version: 1.0](https://img.shields.io/badge/Version-1.0-blue.svg)](./README.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 **CV Management** es un proyecto desarrollado en **Kotlin** para gestionar currículums y reuniones con personal de selección, ayudando a las personas a organizar su búsqueda de empleo de manera eficiente.
+
+> **Estado del proyecto**: En desarrollo. Algunas funcionalidades pueden estar incompletas o no implementadas.
 
 ## Características
 
@@ -15,9 +17,7 @@
 ## Tecnologías Utilizadas
 
 - **Lenguaje**: Kotlin
-- **Frameworks**: 
-  - Para futuras integraciones, se está evaluando Ktor o Spring Boot.
-- **Base de Datos**: SQLite (en desarrollo) o cualquier otra solución embebida.
+- **Base de Datos**: Room
 - **Herramientas de Construcción**: Gradle
 
 ## Instalación
@@ -58,19 +58,6 @@
    - Agrega reuniones con información clave.
    - Consulta el historial de reuniones pasadas.
 
-### Ejemplo de Ejecución
-
-Al ejecutar la aplicación, verás un menú interactivo que te permitirá navegar entre las funcionalidades disponibles.
-
-```kotlin
-fun main() {
-    println("Bienvenido a CV Management")
-    println("Seleccione una opción:")
-    println("1. Gestionar currículums")
-    println("2. Seguimiento de entrevistas")
-    // Más opciones próximamente...
-}
-```
 
 ## Contribuciones
 
